@@ -5,6 +5,12 @@
 
 This is a plugin template for [Zotero](https://www.zotero.org/).
 
+## Attribution and License
+
+This project is based on [windingwind/zotero-plugin-template](https://github.com/windingwind/zotero-plugin-template).
+
+The original template is licensed under AGPL-3.0-or-later, and this project keeps the same license for derivative work. When publishing source code and packaged builds, ensure AGPL obligations are satisfied.
+
 [English](README.md) | [简体中文](doc/README-zhCN.md) | [Français](doc/README-frFR.md)
 
 - Documentation for plugins development

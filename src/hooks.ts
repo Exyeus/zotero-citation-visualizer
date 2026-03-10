@@ -5,6 +5,7 @@ import {
   PromptExampleFactory,
   UIExampleFactory,
 } from "./modules/examples";
+import { CitationGraphFactory } from "./modules/citationGraph";
 import { getString, initLocale } from "./utils/locale";
 import { registerPrefsScripts } from "./modules/preferenceScript";
 import { createZToolkit } from "./utils/ztoolkit";
@@ -81,6 +82,8 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
   PromptExampleFactory.registerAnonymousCommandExample(win);
 
   PromptExampleFactory.registerConditionalCommandExample();
+
+  CitationGraphFactory.registerMenus();
 
   await Zotero.Promise.delay(1000);
 
