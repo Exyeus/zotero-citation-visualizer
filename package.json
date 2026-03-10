@@ -1,24 +1,24 @@
 {
-  "name": "zotero-plugin-template",
+  "name": "zotero-citation-visualizer",
   "type": "module",
   "version": "3.1.0",
-  "description": "Zotero Plugin Template",
+  "description": "Zotero Citation Visualizer",
   "config": {
-    "addonName": "Zotero Plugin Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate"
+    "addonName": "Zotero Citation Visualizer",
+    "addonID": "zotero-citation-visualizer@exyeus.com",
+    "addonRef": "citationvisualizer",
+    "addonInstance": "CitationVisualizer",
+    "prefsPrefix": "extensions.zotero.citationvisualizer"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
+    "url": "git+https://github.com/Exyeus/zotero-citation-visualizer.git"
   },
-  "author": "windingwind",
+  "author": "Exyeus",
   "bugs": {
-    "url": "https://github.com/windingwind/zotero-plugin-template/issues"
+    "url": "https://github.com/Exyeus/zotero-citation-visualizer/issues"
   },
-  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
+  "homepage": "https://github.com/Exyeus/zotero-citation-visualizer#readme",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "zotero-plugin serve",
