@@ -279,7 +279,9 @@ export class CitationGraphFactory {
       .show();
 
     try {
-      const collection = await Zotero.Collections.getAsync(options.collectionID);
+      const collection = await Zotero.Collections.getAsync(
+        options.collectionID,
+      );
       const graphData = await this.buildGraphData(
         collection,
         options,
@@ -603,7 +605,11 @@ export class CitationGraphFactory {
         quickResolvedCount += 1;
         updateProgress(
           `Quick index: ${quickResolvedCount}/${localByItemID.size}`,
-          clampNumber(38 + (quickResolvedCount / localByItemID.size) * 8, 38, 46),
+          clampNumber(
+            38 + (quickResolvedCount / localByItemID.size) * 8,
+            38,
+            46,
+          ),
         );
 
         if (!sourceWork) continue;
@@ -764,7 +770,10 @@ export class CitationGraphFactory {
           addEdge(edges, sourceNode.id, externalNodeID, "remote");
 
           const nextDepth = current.depth + 1;
-          if (nextDepth < options.extensionDepth && !queued.has(externalNodeID)) {
+          if (
+            nextDepth < options.extensionDepth &&
+            !queued.has(externalNodeID)
+          ) {
             queue.push({ nodeID: externalNodeID, depth: nextDepth });
             queued.add(externalNodeID);
           }
@@ -923,7 +932,8 @@ export class CitationGraphFactory {
 
     const includeExternalInput = doc.createElement("input");
     includeExternalInput.type = "checkbox";
-    includeExternalInput.checked = initialData.options.includeExternalReferences;
+    includeExternalInput.checked =
+      initialData.options.includeExternalReferences;
 
     const depthInput = doc.createElement("input");
     depthInput.type = "number";
@@ -997,7 +1007,9 @@ export class CitationGraphFactory {
               action: () => {
                 for (const edge of currentData.edges) {
                   if (edge.source === node.id || edge.target === node.id) {
-                    viewState.hiddenEdgeKeys.add(`${edge.source}->${edge.target}`);
+                    viewState.hiddenEdgeKeys.add(
+                      `${edge.source}->${edge.target}`,
+                    );
                   }
                 }
                 renderCurrentGraph();
@@ -1008,7 +1020,9 @@ export class CitationGraphFactory {
               action: () => {
                 for (const edge of currentData.edges) {
                   if (edge.source === node.id || edge.target === node.id) {
-                    viewState.hiddenEdgeKeys.add(`${edge.source}->${edge.target}`);
+                    viewState.hiddenEdgeKeys.add(
+                      `${edge.source}->${edge.target}`,
+                    );
                   }
                 }
                 hideIsolatedNodes(currentData, viewState);
@@ -1107,20 +1121,14 @@ export class CitationGraphFactory {
       .join(" | ");
 
     container.textContent = "";
-    const root = doc.createElementNS(
-      XHTML_NS,
-      "div",
-    ) as unknown as HTMLElement;
+    const root = doc.createElementNS(XHTML_NS, "div") as unknown as HTMLElement;
     root.setAttribute(
       "style",
       "position:relative;width:100%;height:100%;font-family:Segoe UI, sans-serif;background:linear-gradient(180deg,#f6f8fa 0%,#ffffff 100%);",
     );
     container.appendChild(root);
 
-    const svg = doc.createElementNS(
-      SVG_NS,
-      "svg",
-    ) as unknown as SVGSVGElement;
+    const svg = doc.createElementNS(SVG_NS, "svg") as unknown as SVGSVGElement;
     svg.setAttribute("width", "100%");
     svg.setAttribute("height", "100%");
     svg.setAttribute("viewBox", `0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`);
@@ -1166,7 +1174,10 @@ export class CitationGraphFactory {
       });
     };
     const applyTransform = () => {
-      viewport.setAttribute("transform", `matrix(${scale} 0 0 ${scale} ${tx} ${ty})`);
+      viewport.setAttribute(
+        "transform",
+        `matrix(${scale} 0 0 ${scale} ${tx} ${ty})`,
+      );
       updateLabelScale();
     };
     const clientToViewbox = (clientX: number, clientY: number) => {
@@ -1282,8 +1293,14 @@ export class CitationGraphFactory {
       line.setAttribute("y1", String(lineData.y1));
       line.setAttribute("x2", String(lineData.x2));
       line.setAttribute("y2", String(lineData.y2));
-      line.setAttribute("stroke", edge.relation === "local" ? "#8a8f98" : "#64748b");
-      line.setAttribute("stroke-width", edge.relation === "local" ? "1.4" : "1.1");
+      line.setAttribute(
+        "stroke",
+        edge.relation === "local" ? "#8a8f98" : "#64748b",
+      );
+      line.setAttribute(
+        "stroke-width",
+        edge.relation === "local" ? "1.4" : "1.1",
+      );
       line.setAttribute("opacity", "0.7");
       line.setAttribute("marker-end", "url(#citation-arrow)");
       viewport.appendChild(line);
@@ -1300,8 +1317,14 @@ export class CitationGraphFactory {
       circle.setAttribute("cx", String(pos.x));
       circle.setAttribute("cy", String(pos.y));
       circle.setAttribute("r", String(pos.r));
-      circle.setAttribute("fill", node.nodeType === "local" ? "#1976d2" : "#ef6c00");
-      circle.setAttribute("opacity", node.nodeType === "local" ? "0.95" : "0.8");
+      circle.setAttribute(
+        "fill",
+        node.nodeType === "local" ? "#1976d2" : "#ef6c00",
+      );
+      circle.setAttribute(
+        "opacity",
+        node.nodeType === "local" ? "0.95" : "0.8",
+      );
       circle.setAttribute("stroke", "#ffffff");
       circle.setAttribute("stroke-width", "1.5");
       group.appendChild(circle);
@@ -1392,8 +1415,12 @@ export class CitationGraphFactory {
       controls.appendChild(button);
     };
 
-    addControlButton("+", () => zoomAt(VIEWBOX_WIDTH / 2, VIEWBOX_HEIGHT / 2, 1.2));
-    addControlButton("-", () => zoomAt(VIEWBOX_WIDTH / 2, VIEWBOX_HEIGHT / 2, 0.84));
+    addControlButton("+", () =>
+      zoomAt(VIEWBOX_WIDTH / 2, VIEWBOX_HEIGHT / 2, 1.2),
+    );
+    addControlButton("-", () =>
+      zoomAt(VIEWBOX_WIDTH / 2, VIEWBOX_HEIGHT / 2, 0.84),
+    );
     addControlButton("Reset", () => {
       scale = 1;
       tx = 0;
@@ -1402,7 +1429,11 @@ export class CitationGraphFactory {
     });
   }
 
-  private static computeLayout(nodes: GraphNode[], width: number, height: number) {
+  private static computeLayout(
+    nodes: GraphNode[],
+    width: number,
+    height: number,
+  ) {
     const groups = new Map<number, GraphNode[]>();
     for (const node of nodes) {
       const depth = Math.max(0, node.depth);
@@ -1695,7 +1726,11 @@ function resolveLocalNodeIDFromToken(
 
   try {
     const relationInfo = Zotero.URI.getURIItemLibraryKey(normalizedToken);
-    if (relationInfo && relationInfo.key && localByItemKey.has(relationInfo.key)) {
+    if (
+      relationInfo &&
+      relationInfo.key &&
+      localByItemKey.has(relationInfo.key)
+    ) {
       return localByItemKey.get(relationInfo.key);
     }
   } catch (_error) {
